@@ -152,8 +152,8 @@
             android:gravity="center">
         <ImageView
             android:id="@+id/et_phone"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
             android:background="@drawable/ic_instagram_brands"
              />
         </LinearLayout>
@@ -187,8 +187,8 @@
 
         <ImageView
             android:id="@+id/et_email"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
             android:background="@drawable/ic_youtube_brands"
 
             />
