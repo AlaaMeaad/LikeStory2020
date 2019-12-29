@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#d6e5fa"
     android:layoutDirection="rtl"
-    tools:context=".HomeFragment">
+    tools:context=".ui.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:gravity="center"
             android:text="فيس بوك"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="#3b5998"
+            android:textColor="#336BE4"
             android:textSize="@dimen/_15ssp"
             app:layout_constraintStart_toEndOf="@id/start"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
@@ -71,7 +71,7 @@
     android:layout_height="@dimen/_50sdp"
     android:orientation="horizontal"
     android:id="@+id/line1"
-    android:background="#3b5998 "
+    android:background="#336BE4"
     app:layout_constraintEnd_toStartOf="@id/end"
     app:layout_constraintStart_toEndOf="@id/start"
     app:layout_constraintTop_toBottomOf="@id/tv_name"

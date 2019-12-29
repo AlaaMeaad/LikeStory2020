@@ -55,6 +55,7 @@ ext {
     gson_vesion = '2.8.5'
     intuit = '1.0.6'
     butterknife = '10.1.0'
+    dynamicanimation_version = "1.0.0"
 }
 
 

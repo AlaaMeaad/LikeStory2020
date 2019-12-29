@@ -37,4 +37,8 @@ dependencies {
     //dimension xml
     implementation "com.intuit.ssp:ssp-android:$intuit"
     implementation "com.intuit.sdp:sdp-android:$intuit"
+
+
+    implementation "androidx.dynamicanimation:dynamicanimation:$dynamicanimation_version"
+
 }

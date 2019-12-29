@@ -7,16 +7,73 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.alaameaad.likestory.SplashFragment"
+        android:name="com.alaameaad.likestory.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_splashFragment_to_notConnectionFragment"
+            app:destination="@id/notConnectionFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.alaameaad.likestory.HomeFragment"
+        android:name="com.alaameaad.likestory.ui.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_youtubeFragment"
+            app:destination="@id/youtubeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_twitterFragment"
+            app:destination="@id/twitterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_instagramFragment"
+            app:destination="@id/instagramFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_facebookFragment"
+            app:destination="@id/facebookFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notConnectionFragment"
+        android:name="com.alaameaad.likestory.ui.NotConnectionFragment"
+        android:label="fragment_not_connection"
+        tools:layout="@layout/fragment_not_connection" />
+    <fragment
+        android:id="@+id/facebookFragment"
+        android:name="com.alaameaad.likestory.ui.social.FacebookFragment"
+        android:label="fragment_facebook"
+        tools:layout="@layout/fragment_facebook" >
+
+    </fragment>
+    <fragment
+        android:id="@+id/twitterFragment"
+        android:name="com.alaameaad.likestory.ui.social.TwitterFragment"
+        android:label="fragment_twitter"
+        tools:layout="@layout/fragment_twitter" />
+    <fragment
+        android:id="@+id/instagramFragment"
+        android:name="com.alaameaad.likestory.ui.social.InstagramFragment"
+        android:label="fragment_instagram"
+        tools:layout="@layout/fragment_instagram" />
+    <fragment
+        android:id="@+id/youtubeFragment"
+        android:name="com.alaameaad.likestory.ui.social.YoutubeFragment"
+        android:label="fragment_youtube"
+        tools:layout="@layout/fragment_youtube" />
 </navigation>
