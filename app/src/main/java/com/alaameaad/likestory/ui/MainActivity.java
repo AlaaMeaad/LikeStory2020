@@ -14,6 +14,7 @@ import com.alaameaad.likestory.R;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    Toolbar toolbar;
     private NavController navController;
     private NavHostFragment navHostFragment;
     private Toolbar mToolbar;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
 
     }
 

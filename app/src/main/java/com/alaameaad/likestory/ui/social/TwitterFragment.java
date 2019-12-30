@@ -33,7 +33,7 @@ public class TwitterFragment extends Fragment {
         webView= view.findViewById(R.id.wv_twitter);
         webView.setWebViewClient(new WebViewClient());
 
-        webView.loadUrl("https://twitter.com/login?lang=en");
+        webView.loadUrl("https://twitter.com/login");
 
         return view;
     }

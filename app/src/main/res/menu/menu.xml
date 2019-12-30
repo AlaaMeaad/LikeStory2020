@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/tv_name"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:title="الصفحة الرئيسية"
+        android:fontFamily="@font/cairo_regular"
+        android:icon="@drawable/ic_asset_6"
+        android:textSize="@dimen/_11ssp"
+         />
+
+    <item
+        android:id="@+id/delete"
+        android:title="الخروج"
+        android:fontFamily="@font/cairo_regular"
+        android:icon="@drawable/ic_logout"
+        android:textSize="@dimen/_11ssp"
+        />
+</menu>

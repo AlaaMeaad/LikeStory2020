@@ -33,7 +33,7 @@ public class InstagramFragment extends Fragment {
         webView= view.findViewById(R.id.wv_insta);
         webView.setWebViewClient(new WebViewClient());
 
-        webView.loadUrl("https://www.instagram.com/");
+        webView.loadUrl("http://instagram.com/accounts/login/");
 
         return view;    }
 

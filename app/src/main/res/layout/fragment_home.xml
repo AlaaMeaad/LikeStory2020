@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#d6e5fa"
+    android:background="@drawable/aa"
     android:layoutDirection="rtl"
     tools:context=".ui.HomeFragment">
 
@@ -48,7 +48,7 @@
             android:fontFamily="@font/cairo_bold"
             android:text="هذا البرنامج يتيح لك زيادة عدد الاعجابات بمنشورك سواء كان على الفيس بوك او الانستجرام او تويتر او اليوتيوب ويضمن لك الامان لحسابك"
             android:textAlignment="center"
-            android:textColor="#32407b"
+            android:textColor="@color/cardview_light_background"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintEnd_toStartOf="@id/end"
             app:layout_constraintStart_toEndOf="@id/start"
