@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/_16sdp"
+        android:layout_margin="@dimen/_10sdp"
         app:srcCompat="@android:drawable/ic_input_add"
+        android:layout_above="@+id/addPost"
         style="@style/customFab"/>
     <WebView
         android:id="@+id/wv_face"
@@ -21,6 +23,7 @@
     </WebView>
 
     <LinearLayout
+
         android:id="@+id/addPost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +31,7 @@
         android:layout_gravity="end|bottom"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
 
 
@@ -305,5 +308,4 @@
         </LinearLayout>
     </LinearLayout>
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>

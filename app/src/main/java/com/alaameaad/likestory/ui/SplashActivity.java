@@ -1,17 +1,15 @@
 package com.alaameaad.likestory.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.alaameaad.likestory.HelperMethod;
-import com.alaameaad.likestory.InternetState;
+import com.alaameaad.likestory.helper.InternetState;
 import com.alaameaad.likestory.R;
 
-import static com.alaameaad.likestory.HelperMethod.ReplaceFragment;
+import static com.alaameaad.likestory.helper.HelperMethod.ReplaceFragment;
 
 public class SplashActivity extends AppCompatActivity {
 

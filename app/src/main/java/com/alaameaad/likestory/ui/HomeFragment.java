@@ -1,16 +1,30 @@
 package com.alaameaad.likestory.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.alaameaad.likestory.R;
+import com.alaameaad.likestory.data.api.ApiServers;
+import com.alaameaad.likestory.data.model.facebook.Facebook;
+import com.alaameaad.likestory.helper.HelperLink;
+
+import java.util.List;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.alaameaad.likestory.helper.HelperMethod.dismissProgressDialog;
+import static com.alaameaad.likestory.helper.HelperMethod.showProgressDialog;
 
 
 /**
@@ -19,6 +33,7 @@ import androidx.navigation.Navigation;
 public class HomeFragment extends Fragment {
     private LinearLayout linearLayout1 , linearLayout2 ,linearLayout3 , linearLayout4 ;
     View view;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -67,5 +82,9 @@ public class HomeFragment extends Fragment {
 
         return  view;
     }
+
+
+
+
 
 }

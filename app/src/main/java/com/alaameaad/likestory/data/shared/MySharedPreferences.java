@@ -1,4 +1,4 @@
-package com.alaameaad.likestory;
+package com.alaameaad.likestory.data.shared;
 
 import android.app.Activity;
 import android.content.SharedPreferences;

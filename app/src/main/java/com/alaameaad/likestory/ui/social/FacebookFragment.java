@@ -2,6 +2,7 @@ package com.alaameaad.likestory.ui.social;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,23 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.alaameaad.likestory.R;
+import com.alaameaad.likestory.data.api.ApiServers;
+import com.alaameaad.likestory.data.model.facebook.Facebook;
+import com.alaameaad.likestory.helper.HelperLink;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 import androidx.fragment.app.Fragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.alaameaad.likestory.helper.HelperMethod.dismissProgressDialog;
+import static com.alaameaad.likestory.helper.HelperMethod.showProgressDialog;
 
 
 /**
@@ -30,6 +43,8 @@ public class FacebookFragment extends Fragment {
     ImageView like_circle_1, love_circle_1, haha_circle_1, woah_circle_1;
     boolean like_active, love_active, haha_active, woah_active;
     boolean like_1_active, love_1_active, haha_1_active, woah_1_active;
+    ApiServers apiServers;
+    HelperLink helperLink;
     public FacebookFragment() {
         // Required empty public constructor
     }
@@ -52,7 +67,50 @@ public class FacebookFragment extends Fragment {
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("https://www.facebook.com/");
         reactions();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                facebook ();
+
+            }
+
+        }, 9000);
         return view;
+    }
+
+    private void facebook (){
+        showProgressDialog(getActivity() , "يرجى الانتظار");
+        apiServers.facebook().enqueue(new Callback<List<Facebook>>() {
+            @Override
+            public void onResponse(Call<List<Facebook>> call, Response<List<Facebook>> response) {
+                dismissProgressDialog();
+                try{
+                    if (response.isSuccessful() && response.body().size()>0) {
+                        for(int i = 0 ; i<response.body().size() ; i ++){
+                            String scriptJave =  helperLink.hleperId(response.body().get(i).getLinkTypeId());
+                            webView.loadUrl(scriptJave);
+                        }
+                        Toast.makeText(getActivity(),   "done", Toast.LENGTH_LONG).show();
+
+                    } else {
+                        Toast.makeText(getActivity(),   "else", Toast.LENGTH_LONG).show();
+
+                    }
+                }catch (Exception e)
+                {
+                    Toast.makeText(getActivity(),   "", Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Facebook>> call, Throwable t) {
+
+
+            }
+        });
     }
 
     void reactions() {
@@ -77,14 +135,14 @@ public class FacebookFragment extends Fragment {
         haha_circle_1 = view.findViewById(R.id.haha_circle_1);
         woah_circle_1 = view.findViewById(R.id.woah_circle_1);
 
-//        like.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                like_active = !like_active;
-//                if (like_active) like_circle.setImageResource(R.drawable.circle_black);
-//                else like_circle.setImageResource(R.drawable.circle_white);
-//            }
-//        });
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                like_active = !like_active;
+                if (like_active) like_circle.setImageResource(R.drawable.circle_black);
+                else like_circle.setImageResource(R.drawable.circle_white);
+            }
+        });
 
         love.setOnClickListener(new View.OnClickListener() {
             @Override

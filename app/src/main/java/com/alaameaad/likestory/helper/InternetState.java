@@ -1,4 +1,4 @@
-package com.alaameaad.likestory;
+package com.alaameaad.likestory.helper;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
