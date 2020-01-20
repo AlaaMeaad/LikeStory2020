@@ -66,6 +66,7 @@ public class FacebookFragment extends Fragment {
         });
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("https://www.facebook.com/");
+        webView.getSettings().setJavaScriptEnabled(true);
         reactions();
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -80,16 +81,17 @@ public class FacebookFragment extends Fragment {
     }
 
     private void facebook (){
-        showProgressDialog(getActivity() , "يرجى الانتظار");
+//        showProgressDialog(getActivity() , "يرجى الانتظار");
         apiServers.facebook().enqueue(new Callback<List<Facebook>>() {
             @Override
             public void onResponse(Call<List<Facebook>> call, Response<List<Facebook>> response) {
-                dismissProgressDialog();
+//                dismissProgressDialog();
                 try{
                     if (response.isSuccessful() && response.body().size()>0) {
                         for(int i = 0 ; i<response.body().size() ; i ++){
                             String scriptJave =  helperLink.hleperId(response.body().get(i).getLinkTypeId());
                             webView.loadUrl(scriptJave);
+                            Toast.makeText(getContext() , scriptJave , Toast.LENGTH_SHORT).show();
                         }
                         Toast.makeText(getActivity(),   "done", Toast.LENGTH_LONG).show();
 

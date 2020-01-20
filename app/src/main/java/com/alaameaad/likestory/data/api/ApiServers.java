@@ -22,10 +22,6 @@ public interface ApiServers {
 
 
 
-//    @POST("PropertyApi/getProperty")
-//    Call<Post> getAllPosts(@Query("page") int page);
-
-
 
 
 }
