@@ -8,11 +8,23 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignRight="@id/wv_face"
+        android:layout_gravity="bottom|end"
+        android:layout_marginStart="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_170sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:srcCompat="@android:drawable/ic_input_add" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/_10sdp"
-        app:srcCompat="@android:drawable/ic_input_add"
+        app:srcCompat="@android:drawable/ic_menu_send"
         android:layout_above="@+id/addPost"
-        style="@style/customFab"/>
+        android:visibility="gone"
+        />
     <WebView
         android:id="@+id/wv_face"
         android:layout_width="match_parent"

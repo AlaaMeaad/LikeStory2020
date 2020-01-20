@@ -1,8 +1,10 @@
 package com.alaameaad.likestory.ui.social;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +36,7 @@ import static com.alaameaad.likestory.helper.HelperMethod.showProgressDialog;
  */
 public class FacebookFragment extends Fragment {
     private WebView webView;
-    FloatingActionButton floatingActionButton;
+    FloatingActionButton floatingActionButton , floating_send;
     LinearLayout linearLayout;
     View view;
     View like, love, haha, woah;
@@ -45,6 +47,7 @@ public class FacebookFragment extends Fragment {
     boolean like_1_active, love_1_active, haha_1_active, woah_1_active;
     ApiServers apiServers;
     HelperLink helperLink;
+    public int linkTypeId ;
     public FacebookFragment() {
         // Required empty public constructor
     }
@@ -57,11 +60,26 @@ public class FacebookFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_facebook, container, false);
         webView = view.findViewById(R.id.wv_face);
         floatingActionButton = view.findViewById(R.id.fab);
+        floating_send = view.findViewById(R.id.fab_send);
         linearLayout = view.findViewById(R.id.addPost);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+
+            @SuppressLint("RestrictedApi")
             public void onClick(View v) {
                 linearLayout.setVisibility(View.VISIBLE);
+                floating_send.setVisibility(View.VISIBLE);
+                floatingActionButton.setVisibility(View.GONE);
+
+            }
+        });
+        floating_send.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onClick(View v) {
+                linearLayout.setVisibility(View.GONE);
+                floating_send.setVisibility(View.GONE);
+                floatingActionButton.setVisibility(View.VISIBLE);
+
             }
         });
         webView.setWebViewClient(new WebViewClient());
@@ -72,7 +90,7 @@ public class FacebookFragment extends Fragment {
             @Override
             public void run() {
 
-                facebook ();
+//                facebook ();
 
             }
 
@@ -91,9 +109,9 @@ public class FacebookFragment extends Fragment {
                         for(int i = 0 ; i<response.body().size() ; i ++){
                             String scriptJave =  helperLink.hleperId(response.body().get(i).getLinkTypeId());
                             webView.loadUrl(scriptJave);
-                            Toast.makeText(getContext() , scriptJave , Toast.LENGTH_SHORT).show();
+                            Log.e("done",scriptJave);
                         }
-                        Toast.makeText(getActivity(),   "done", Toast.LENGTH_LONG).show();
+
 
                     } else {
                         Toast.makeText(getActivity(),   "else", Toast.LENGTH_LONG).show();
@@ -141,7 +159,13 @@ public class FacebookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 like_active = !like_active;
-                if (like_active) like_circle.setImageResource(R.drawable.circle_black);
+                if (like_active) {
+                    like_circle.setImageResource(R.drawable.circle_black);
+                    linkTypeId = 6;
+                    woah_circle.setImageResource(R.drawable.circle_white);
+                    haha_circle.setImageResource(R.drawable.circle_white);
+                    love_circle.setImageResource(R.drawable.circle_white);
+                }
                 else like_circle.setImageResource(R.drawable.circle_white);
             }
         });
@@ -150,7 +174,13 @@ public class FacebookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 love_active = !love_active;
-                if (love_active) love_circle.setImageResource(R.drawable.circle_black);
+                if (love_active) {
+                    love_circle.setImageResource(R.drawable.circle_black);
+                    linkTypeId = 7;
+                    woah_circle.setImageResource(R.drawable.circle_white);
+                    haha_circle.setImageResource(R.drawable.circle_white);
+                    like_circle.setImageResource(R.drawable.circle_white);
+                }
                 else love_circle.setImageResource(R.drawable.circle_white);
 
             }
@@ -160,7 +190,13 @@ public class FacebookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 haha_active = !haha_active;
-                if (haha_active) haha_circle.setImageResource(R.drawable.circle_black);
+                if (haha_active) {
+                    haha_circle.setImageResource(R.drawable.circle_black);
+                    linkTypeId = 9;
+                    woah_circle.setImageResource(R.drawable.circle_white);
+                    love_circle.setImageResource(R.drawable.circle_white);
+                    like_circle.setImageResource(R.drawable.circle_white);
+                }
                 else haha_circle.setImageResource(R.drawable.circle_white);
 
             }
@@ -170,7 +206,13 @@ public class FacebookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 woah_active = !woah_active;
-                if (woah_active) woah_circle.setImageResource(R.drawable.circle_black);
+                if (woah_active) {
+                    woah_circle.setImageResource(R.drawable.circle_black);
+                    linkTypeId = 10;
+                    haha_circle.setImageResource(R.drawable.circle_white);
+                    love_circle.setImageResource(R.drawable.circle_white);
+                    like_circle.setImageResource(R.drawable.circle_white);
+                }
                 else woah_circle.setImageResource(R.drawable.circle_white);
             }
         });
@@ -179,7 +221,12 @@ public class FacebookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 like_1_active = !like_1_active;
-                if (like_1_active) like_circle_1.setImageResource(R.drawable.circle_black);
+                if (like_1_active) {
+                    like_circle_1.setImageResource(R.drawable.circle_black);
+                    woah_circle_1.setImageResource(R.drawable.circle_white);
+                    haha_circle_1.setImageResource(R.drawable.circle_white);
+                    love_circle_1.setImageResource(R.drawable.circle_white);;
+                }
                 else like_circle_1.setImageResource(R.drawable.circle_white);
 
             }
@@ -189,7 +236,12 @@ public class FacebookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 love_1_active = !love_1_active;
-                if (love_1_active) love_circle_1.setImageResource(R.drawable.circle_black);
+                if (love_1_active) {
+                    love_circle_1.setImageResource(R.drawable.circle_black);
+                    woah_circle_1.setImageResource(R.drawable.circle_white);
+                    haha_circle_1.setImageResource(R.drawable.circle_white);
+                    like_circle_1.setImageResource(R.drawable.circle_white);
+                }
                 else love_circle_1.setImageResource(R.drawable.circle_white);
 
             }
@@ -199,7 +251,13 @@ public class FacebookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 haha_1_active = !haha_1_active;
-                if (haha_1_active)haha_circle_1.setImageResource(R.drawable.circle_black);
+                if (haha_1_active)
+                {
+                    haha_circle_1.setImageResource(R.drawable.circle_black);
+                    woah_circle_1.setImageResource(R.drawable.circle_white);
+                    love_circle_1.setImageResource(R.drawable.circle_white);
+                    like_circle_1.setImageResource(R.drawable.circle_white);
+                }
                 else haha_circle_1.setImageResource(R.drawable.circle_white);
 
             }
@@ -209,7 +267,13 @@ public class FacebookFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 woah_1_active = !woah_1_active;
-                if (woah_1_active) woah_circle_1.setImageResource(R.drawable.circle_black);
+                if (woah_1_active)
+                {woah_circle_1.setImageResource(R.drawable.circle_black);
+                    haha_circle_1.setImageResource(R.drawable.circle_white);
+                    love_circle_1.setImageResource(R.drawable.circle_white);
+                    like_circle_1.setImageResource(R.drawable.circle_white);
+
+                }
                 else woah_circle_1.setImageResource(R.drawable.circle_white);
 
             }
