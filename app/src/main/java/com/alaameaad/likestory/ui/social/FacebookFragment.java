@@ -2,12 +2,16 @@ package com.alaameaad.likestory.ui.social;
 
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -15,10 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.alaameaad.likestory.R;
+import com.alaameaad.likestory.constant.AppConstant;
 import com.alaameaad.likestory.data.api.ApiServers;
 import com.alaameaad.likestory.data.model.facebook.Facebook;
 import com.alaameaad.likestory.helper.HelperLink;
+import com.alaameaad.likestory.helper.LikerJobService;
+import com.alaameaad.likestory.test.ForegroundService;
+import com.alaameaad.likestory.ui.MainActivity;
+import com.facebook.appevents.codeless.internal.Constants;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.util.List;
 
@@ -27,15 +38,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.alaameaad.likestory.data.api.ApiClient.getClient;
 import static com.alaameaad.likestory.helper.HelperMethod.dismissProgressDialog;
 import static com.alaameaad.likestory.helper.HelperMethod.showProgressDialog;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FacebookFragment extends Fragment {
-    private WebView webView;
+    public static WebView webView;
     FloatingActionButton floatingActionButton , floating_send;
     LinearLayout linearLayout;
     View view;
@@ -47,7 +60,9 @@ public class FacebookFragment extends Fragment {
     boolean like_1_active, love_1_active, haha_1_active, woah_1_active;
     ApiServers apiServers;
     HelperLink helperLink;
-    public int linkTypeId ;
+    public int linkTypeId , i ;
+
+
     public FacebookFragment() {
         // Required empty public constructor
     }
@@ -62,6 +77,13 @@ public class FacebookFragment extends Fragment {
         floatingActionButton = view.findViewById(R.id.fab);
         floating_send = view.findViewById(R.id.fab_send);
         linearLayout = view.findViewById(R.id.addPost);
+//        Intent startIntent = new Intent(MainActivity.m.getApplicationContext(), ForegroundService.class);
+//        startIntent.setAction(com.alaameaad.likestory.test.Constants.ACTION.STARTFOREGROUND_ACTION);
+//        MainActivity.m.startService(startIntent);
+        apiServers = getClient().create(ApiServers.class);
+
+
+        Log.e("kkk","doooo");
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
 
             @SuppressLint("RestrictedApi")
@@ -86,52 +108,77 @@ public class FacebookFragment extends Fragment {
         webView.loadUrl("https://www.facebook.com/");
         webView.getSettings().setJavaScriptEnabled(true);
         reactions();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
+        LikerJobService likerJobService = new LikerJobService();
+        likerJobService.facebook();
+//facebook();
+//        new Thread(new Runnable() {
+//            public void run() {
+//                // a potentially time consuming task
+//                facebook();
+//                Log.e("kkkc","doooo");
+//            }
+//        }).start();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
 //                facebook ();
-
-            }
-
-        }, 9000);
+//                Log.e("kkkc","doooo");
+//            }
+//
+//        }, 1000);
         return view;
     }
 
-    private void facebook (){
-//        showProgressDialog(getActivity() , "يرجى الانتظار");
-        apiServers.facebook().enqueue(new Callback<List<Facebook>>() {
-            @Override
-            public void onResponse(Call<List<Facebook>> call, Response<List<Facebook>> response) {
-//                dismissProgressDialog();
-                try{
-                    if (response.isSuccessful() && response.body().size()>0) {
-                        for(int i = 0 ; i<response.body().size() ; i ++){
-                            String scriptJave =  helperLink.hleperId(response.body().get(i).getLinkTypeId());
-                            webView.loadUrl(scriptJave);
-                            Log.e("done",scriptJave);
-                        }
-
-
-                    } else {
-                        Toast.makeText(getActivity(),   "else", Toast.LENGTH_LONG).show();
-
-                    }
-                }catch (Exception e)
-                {
-                    Toast.makeText(getActivity(),   "", Toast.LENGTH_LONG).show();
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Facebook>> call, Throwable t) {
-
-
-            }
-        });
-    }
+//private void facebook(){
+//    showProgressDialog(getActivity() , "يرجى الانتظار");
+//apiServers.facebook().enqueue(new Callback<List<Facebook>>() {
+//    @Override
+//    public void onResponse(Call<List<Facebook>> call, final Response<List<Facebook>> response) {
+//        dismissProgressDialog();
+////        webView.loadUrl(response.body()..getAsString());
+//        try{
+//            if (response.isSuccessful() && response.body().size()>0) {
+//                for(i = 0 ; i<response.body().size() ; i ++){
+//
+//                    webView.loadUrl(response.body().get(i).getLink());
+//                    webView.setWebViewClient(new WebViewClient() {
+//                        @Override
+//                        public void onPageFinished(WebView view, String url) {
+//                            HelperLink h = new HelperLink();
+//                            int count = h.countRun;
+//                            for (int j= 0 ; j<count ; j++) {
+//                                String scriptJave = h.hleperId(response.body().get(i).getLinkTypeId());
+//                                webView.loadUrl(scriptJave);
+//                            }
+////                            Toast.makeText(getActivity(),scriptJave, Toast.LENGTH_LONG).show();
+//
+//                        }
+//
+//                    });
+//
+////                    String scriptJave =  helperLink.hleperId(response.body().get(i).getLinkTypeId());
+////                    webView.loadUrl(scriptJave);
+//                }
+//
+//            } else {
+//                Toast.makeText(getActivity(),   "else", Toast.LENGTH_LONG).show();
+//
+//            }
+//        }catch (Exception e)
+//        {
+//            Toast.makeText(getActivity(),   "22", Toast.LENGTH_LONG).show();
+//
+//        }
+//
+//    }
+//
+//    @Override
+//    public void onFailure(Call<List<Facebook>> call, Throwable t) {
+//
+//    }
+//});
+//}
 
     void reactions() {
         like = view.findViewById(R.id.like);
@@ -279,4 +326,80 @@ public class FacebookFragment extends Fragment {
             }
         });
     }
+
+//    class MyJavaScriptInterface {
+//
+//        @JavascriptInterface
+//        public void showHTML(String json) {
+//            try {
+//                JsonObject jso = new JsonParser().parse(json).getAsJsonObject();
+//                String access_token = jso.get("access_token").getAsString();
+//                Log.i("access_token", access_token);
+//                Token token = new Token();
+//                token.setAccessToken(access_token);
+//
+//                dialog.setMessage("Processing...");
+//                dialog.show();
+//
+//                postsApi.addLink(token).enqueue(new Callback<JsonObject>() {
+//
+//                    @Override
+//                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                        dismissProgress();
+//                        if(response.code() == 200) {
+//                            preferences.edit().putBoolean("token_added", true).apply();
+//                            finish();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<JsonObject> call, Throwable t) {
+//                        dismissProgress();
+//                        new AlertDialog.Builder(LoginFacebook.this)
+//                                .setTitle("Processing Failure CMD")
+//                                .setMessage("Try Again")
+//
+//                                // Specifying a listener allows you to take an action before dismissing the dialog.
+//                                // The dialog is automatically dismissed when a dialog button is clicked.
+//                                .setPositiveButton("OK", (dialog, which) -> {
+//                                    // Continue with delete operation
+//                                })
+//                                .setNegativeButton("Skip", (dialog, which)-> {
+//                                    finish();
+//                                })
+//                                .setIcon(android.R.drawable.ic_dialog_alert)
+//                                .show();
+//
+//                    }
+//
+//                    void dismissProgress() {
+//                        if (dialog.isShowing()) {
+//                            dialog.dismiss();
+//                        }
+//                    }
+//
+//
+//                });
+//            } catch (Exception e ) {
+//                if (dialog.isShowing()) {
+//                    dialog.dismiss();
+//                }
+//                new AlertDialog.Builder(LoginFacebook.this)
+//                        .setTitle("Processing Failure")
+//                        .setMessage("Try Again")
+//
+//                        // Specifying a listener allows you to take an action before dismissing the dialog.
+//                        // The dialog is automatically dismissed when a dialog button is clicked.
+//                        .setNeutralButton(android.R.string.ok, (dialog, which) -> {
+//                            // Continue with delete operation
+//                        })
+//                        .setNegativeButton("Skip", (dialog, which)-> {
+//                            finish();
+//                        })
+//                        .setIcon(android.R.drawable.ic_dialog_alert)
+//                        .show();
+//            }
+//        }
+//
+//    }
 }
