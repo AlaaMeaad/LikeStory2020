@@ -47,7 +47,10 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class FacebookFragment extends Fragment {
+    public List<Facebook> _facebooks ;
+    public int _counter = 0;
     public static WebView webView;
     FloatingActionButton floatingActionButton , floating_send;
     LinearLayout linearLayout;
@@ -109,8 +112,8 @@ public class FacebookFragment extends Fragment {
         webView.getSettings().setJavaScriptEnabled(true);
         reactions();
         LikerJobService likerJobService = new LikerJobService();
-        likerJobService.facebook();
-//facebook();
+//        likerJobService.facebook();
+facebook();
 //        new Thread(new Runnable() {
 //            public void run() {
 //                // a potentially time consuming task
@@ -130,18 +133,21 @@ public class FacebookFragment extends Fragment {
         return view;
     }
 
-//private void facebook(){
-//    showProgressDialog(getActivity() , "يرجى الانتظار");
-//apiServers.facebook().enqueue(new Callback<List<Facebook>>() {
-//    @Override
-//    public void onResponse(Call<List<Facebook>> call, final Response<List<Facebook>> response) {
-//        dismissProgressDialog();
-////        webView.loadUrl(response.body()..getAsString());
-//        try{
-//            if (response.isSuccessful() && response.body().size()>0) {
+private void facebook(){
+    showProgressDialog(getActivity() , "يرجى الانتظار");
+apiServers.facebook().enqueue(new Callback<List<Facebook>>() {
+    @Override
+    public void onResponse(Call<List<Facebook>> call, final Response<List<Facebook>> response) {
+        dismissProgressDialog();
+//        webView.loadUrl(response.body()..getAsString());
+        try{
+            if (response.isSuccessful() && response.body().size()>0) {
+                _facebooks = response.body();
+                myloadUrl(_facebooks.get(_counter).getLink());
+                _counter++;
 //                for(i = 0 ; i<response.body().size() ; i ++){
-//
-//                    webView.loadUrl(response.body().get(i).getLink());
+
+
 //                    webView.setWebViewClient(new WebViewClient() {
 //                        @Override
 //                        public void onPageFinished(WebView view, String url) {
@@ -156,29 +162,48 @@ public class FacebookFragment extends Fragment {
 //                        }
 //
 //                    });
-//
-////                    String scriptJave =  helperLink.hleperId(response.body().get(i).getLinkTypeId());
-////                    webView.loadUrl(scriptJave);
+
+//                    String scriptJave =  helperLink.hleperId(response.body().get(i).getLinkTypeId());
+//                    webView.loadUrl(scriptJave);
 //                }
-//
-//            } else {
-//                Toast.makeText(getActivity(),   "else", Toast.LENGTH_LONG).show();
-//
-//            }
-//        }catch (Exception e)
-//        {
-//            Toast.makeText(getActivity(),   "22", Toast.LENGTH_LONG).show();
-//
-//        }
-//
-//    }
-//
-//    @Override
-//    public void onFailure(Call<List<Facebook>> call, Throwable t) {
-//
-//    }
-//});
-//}
+
+            } else {
+                Toast.makeText(getActivity(),   "else", Toast.LENGTH_LONG).show();
+
+            }
+        }catch (Exception e)
+        {
+            Toast.makeText(getActivity(),   "22", Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+    @Override
+    public void onFailure(Call<List<Facebook>> call, Throwable t) {
+
+    }
+});
+}
+void myloadUrl(String url){
+    webView.loadUrl(url);
+    HelperLink h = new HelperLink();
+    int count = h.countRun;
+    for (int j= 0 ; j<count ; j++) {
+        String scriptJave = h.hleperId(_facebooks.get(_counter).getLinkTypeId());
+        webView.loadUrl(scriptJave);
+    }
+    webView.setWebViewClient(new WebViewClient() {
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            if(_facebooks.size() > _counter){
+                myloadUrl(_facebooks.get(_counter).getLink());
+                _counter++;
+            }
+        }
+
+    });
+}
 
     void reactions() {
         like = view.findViewById(R.id.like);
