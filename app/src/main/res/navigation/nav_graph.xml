@@ -37,17 +37,8 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_youtubeFragment"
-            app:destination="@id/youtubeFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_twitterFragment"
-            app:destination="@id/twitterFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_instagramFragment"
-            app:destination="@id/instagramFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_facebookFragment"
-            app:destination="@id/facebookFragment" />
+            android:id="@+id/action_homeFragment_to_goToWebFragment"
+            app:destination="@id/goToWebFragment" />
     </fragment>
     <fragment
         android:id="@+id/notConnectionFragment"
@@ -55,25 +46,7 @@
         android:label="fragment_not_connection"
         tools:layout="@layout/fragment_not_connection" />
     <fragment
-        android:id="@+id/facebookFragment"
-        android:name="com.alaameaad.likestory.ui.social.FacebookFragment"
-        android:label="fragment_facebook"
-        tools:layout="@layout/fragment_facebook" >
-
-    </fragment>
-    <fragment
-        android:id="@+id/twitterFragment"
-        android:name="com.alaameaad.likestory.ui.social.TwitterFragment"
-        android:label="fragment_twitter"
-        tools:layout="@layout/fragment_twitter" />
-    <fragment
-        android:id="@+id/instagramFragment"
-        android:name="com.alaameaad.likestory.ui.social.InstagramFragment"
-        android:label="fragment_instagram"
-        tools:layout="@layout/fragment_instagram" />
-    <fragment
-        android:id="@+id/youtubeFragment"
-        android:name="com.alaameaad.likestory.ui.social.YoutubeFragment"
-        android:label="fragment_youtube"
-        tools:layout="@layout/fragment_youtube" />
+        android:id="@+id/goToWebFragment"
+        android:name="com.alaameaad.likestory.ui.GoToWebFragment"
+        android:label="GoToWebFragment" />
 </navigation>

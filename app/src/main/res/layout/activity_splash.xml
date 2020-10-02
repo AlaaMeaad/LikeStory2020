@@ -25,17 +25,19 @@
 
     <ImageView
         android:id="@+id/image1"
-        android:layout_marginRight="@dimen/_30sdp"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentStart="true"
         android:layout_gravity="center_horizontal"
+        android:layout_marginStart="35dp"
+        android:layout_marginRight="@dimen/_10sdp"
         android:layout_marginBottom="@dimen/_30sdp"
         android:src="@drawable/ic_love" />
 
     <ImageView
         android:id="@+id/image2"
         android:layout_toEndOf="@id/image1"
-        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_10sdp"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_gravity="center_horizontal"
@@ -50,20 +52,23 @@
         android:layout_gravity="center_horizontal"
         android:src="@drawable/ic_wow"
         android:layout_marginBottom="@dimen/_30sdp"/>
+
     <ImageView
         android:id="@+id/image4"
-        android:layout_marginRight="@dimen/_30sdp"
-        android:layout_below="@+id/image1"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
+        android:layout_below="@+id/image1"
+        android:layout_alignParentStart="true"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_haha_emoji"
-        android:layout_marginBottom="@dimen/_20sdp"/>
+        android:layout_marginStart="35dp"
+
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:src="@drawable/ic_haha_emoji" />
     <ImageView
         android:id="@+id/image5"
         android:layout_toEndOf="@id/image4"
         android:layout_below="@+id/image2"
-        android:layout_marginRight="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_10sdp"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_gravity="center_horizontal"
@@ -80,12 +85,15 @@
         android:layout_marginBottom="@dimen/_20sdp"/>
 
     <ProgressBar
-        android:paddingLeft="@dimen/_70sdp"
-        android:layout_below="@+id/image5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/image5"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="1dp"
         android:indeterminate="true"
-        android:indeterminateTint="@color/colorAccent" />
+        android:foregroundGravity="center"
+        android:indeterminateTint="@color/colorAccent"
+        android:paddingLeft="@dimen/_70sdp" />
 
 </RelativeLayout>
 </LinearLayout>

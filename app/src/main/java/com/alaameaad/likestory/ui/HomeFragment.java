@@ -31,7 +31,7 @@ import static com.alaameaad.likestory.helper.HelperMethod.showProgressDialog;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    private LinearLayout linearLayout1 , linearLayout2 ,linearLayout3 , linearLayout4 ;
+    private LinearLayout linearLayout1  ;
     View view;
 
 
@@ -46,36 +46,11 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_home, container, false);
         linearLayout1 = view.findViewById(R.id.line1);
-        linearLayout2 = view.findViewById(R.id.line2);
-        linearLayout3 = view.findViewById(R.id.line3);
-        linearLayout4 = view.findViewById(R.id.line4);
         linearLayout1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_facebookFragment);
-            }
-        });
-        linearLayout2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_twitterFragment);
-
-            }
-        });
-        linearLayout3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_instagramFragment);
-            }
-        });
-        linearLayout4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_youtubeFragment);
+                Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_goToWebFragment);
             }
         });
 

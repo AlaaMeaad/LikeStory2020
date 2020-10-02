@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 
 import com.alaameaad.likestory.R;
-import com.alaameaad.likestory.test.ForegroundService;
 
 import java.util.ArrayList;
 
